@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — 01Hush</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080616; --bg2: #0e0b1e;
+      --accent: #7c6af7; --accent2: #a78bfa;
+      --text: #ffffff; --muted: rgba(255,255,255,0.55);
+      --border: rgba(124,106,247,0.2); --glass: rgba(255,255,255,0.04);
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 40px; border-bottom: 1px solid var(--border);
+      background: rgba(8,6,22,0.9); backdrop-filter: blur(12px);
+    }
+    .logo { font-size: 18px; font-weight: 600; text-decoration: none; color: var(--text); }
+    .logo span { color: var(--accent2); font-weight: 300; }
+    nav a.back { color: var(--muted); text-decoration: none; font-size: 14px; }
+    nav a.back:hover { color: var(--text); }
+    .content { max-width: 720px; margin: 0 auto; padding: 72px 24px 100px; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 12px; }
+    h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 8px; }
+    .subtitle { font-size: 17px; color: var(--muted); margin-bottom: 56px; }
+    .contact-box {
+      background: rgba(124,106,247,0.08);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .contact-box p { font-size: 15px; color: rgba(255,255,255,0.8); max-width: 400px; }
+    .contact-box a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .contact-box a:hover { opacity: 0.85; }
+    h2 { font-size: 22px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.3px; }
+    .faq { display: flex; flex-direction: column; gap: 4px; margin-bottom: 56px; }
+    details {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--glass);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    details[open] { border-color: rgba(124,106,247,0.5); }
+    summary {
+      padding: 18px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+';
+      color: var(--accent2);
+      font-size: 18px;
+      font-weight: 300;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after { transform: rotate(45deg); }
+    .answer {
+      padding: 0 20px 18px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .answer a { color: var(--accent2); text-decoration: none; }
+    .answer a:hover { text-decoration: underline; }
+    footer {
+      padding: 32px 40px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; opacity: 0.5; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">01<span>hush</span></a>
+  <a href="index.html" class="back">← Back</a>
+</nav>
+
+<div class="content">
+  <p class="eyebrow">Support</p>
+  <h1>How can we help?</h1>
+  <p class="subtitle">Browse common questions below, or reach out directly.</p>
+
+  <div class="contact-box">
+    <p>Can't find what you're looking for? Send us a message and we'll get back to you.</p>
+    <a href="mailto:support@zerox1.world">Email Support</a>
+  </div>
+
+  <h2>Frequently asked questions</h2>
+
+  <div class="faq">
+
+    <details>
+      <summary>Does 01Hush send my conversations to the internet?</summary>
+      <div class="answer">No. The AI model runs entirely on your iPhone. Your conversations are never sent to any server. After the initial model download, the app works with no internet connection at all.</div>
+    </details>
+
+    <details>
+      <summary>Why does the app need to download a large file first?</summary>
+      <div class="answer">01Hush uses Google's Gemma 4 language model, which runs locally on your device. The initial download (~1–2 GB depending on the model) contains the model weights. This only happens once. After that, no data transfer is needed.</div>
+    </details>
+
+    <details>
+      <summary>Which iPhones are supported?</summary>
+      <div class="answer">01Hush requires iPhone 15 Pro or later. The app uses the A17 Pro chip (or newer) for on-device AI inference via Apple's MLX framework. Older devices do not have sufficient memory or Neural Engine capability for this model size.</div>
+    </details>
+
+    <details>
+      <summary>What is the memory feature? Can I turn it off?</summary>
+      <div class="answer">01Hush builds a private picture of you over time based on your conversations — things like your work, your goals, and your relationships. This helps the AI give you more personal, contextual responses.<br><br>All memory is stored locally on your device. You can reset it any time in Settings → Reset agent memory. You can also tell the AI directly to forget something in conversation.</div>
+    </details>
+
+    <details>
+      <summary>How do I cancel my Pro subscription?</summary>
+      <div class="answer">Open the Settings app on your iPhone → Apple ID → Subscriptions → 01Hush → Cancel Subscription. You'll retain access to Pro features until the end of your current billing period.</div>
+    </details>
+
+    <details>
+      <summary>I subscribed but Pro features aren't unlocked. What do I do?</summary>
+      <div class="answer">Go to Settings → Restore Purchases inside the app. If the issue persists, make sure you're signed into the same Apple ID used for the purchase, then restart the app. If it still doesn't work, email us at <a href="mailto:support@zerox1.world">support@zerox1.world</a>.</div>
+    </details>
+
+    <details>
+      <summary>Can I request a refund?</summary>
+      <div class="answer">Refunds are handled by Apple. Visit <a href="https://reportaproblem.apple.com" target="_blank">reportaproblem.apple.com</a>, sign in with your Apple ID, find the 01Hush purchase, and request a refund. Apple typically processes these within a few days.</div>
+    </details>
+
+    <details>
+      <summary>What is 18+ Mode?</summary>
+      <div class="answer">18+ Mode removes content filters so you can discuss mature and sensitive topics without the AI deflecting. It requires a Pro subscription. By enabling it, you confirm you are 18 or older. Even in this mode, the AI will not generate sexual content involving minors or content that facilitates real-world harm.</div>
+    </details>
+
+    <details>
+      <summary>The app crashed or the model stopped responding. What should I do?</summary>
+      <div class="answer">On-device AI inference requires significant memory. If the app crashes during a long conversation, try starting a new chat — shorter context windows use less memory. Make sure no other large apps are running in the background. If crashes happen frequently, email us with your iPhone model and iOS version so we can investigate.</div>
+    </details>
+
+    <details>
+      <summary>How do I delete all my data?</summary>
+      <div class="answer">All data is stored locally on your device. To delete everything, delete 01Hush from your iPhone — all conversations, memories, and settings are removed instantly. You can also selectively clear history (Settings → Clear all chat history) or memory (Settings → Reset agent memory) without deleting the app.</div>
+    </details>
+
+    <details>
+      <summary>Is the app available on Android or iPad?</summary>
+      <div class="answer">Currently, 01Hush is available on iPhone only. iPad support is planned. Android is not currently supported because the app relies on Apple's MLX framework for on-device inference, which is specific to Apple Silicon.</div>
+    </details>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+  </div>
+  <div class="footer-copy">© 2026 zerox1. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

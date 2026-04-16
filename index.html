@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01Hush — The friend who never tells</title>
+  <meta name="description" content="A private AI companion that runs entirely on your iPhone. No servers. No accounts. Your words never leave your hands.">
+  <meta property="og:title" content="01Hush — The friend who never tells">
+  <meta property="og:description" content="Some things you can't say out loud. 01Hush listens to everything and tells no one.">
+  <meta property="og:type" content="website">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080616;
+      --bg2:      #0e0b1e;
+      --accent:   #7c6af7;
+      --accent2:  #a78bfa;
+      --text:     #ffffff;
+      --muted:    rgba(255,255,255,0.5);
+      --border:   rgba(124,106,247,0.2);
+      --glass:    rgba(255,255,255,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,6,22,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
+    .logo span { color: var(--accent2); font-weight: 300; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+    nav .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-cta {
+      background: var(--accent);
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 13px !important;
+    }
+    .nav-cta:hover { opacity: 0.9; }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,106,247,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent2);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: rgba(124,106,247,0.08);
+    }
+    .dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #4ade80;
+    }
+    h1 {
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--accent2);
+    }
+    .hero-sub {
+      font-size: clamp(17px, 2.5vw, 22px);
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--text); border-color: rgba(124,106,247,0.5); }
+    .hero-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.6;
+    }
+
+    /* PHONE MOCKUP */
+    .phone-wrap {
+      margin-top: 72px;
+      position: relative;
+      display: inline-block;
+    }
+    .phone {
+      width: 260px;
+      border-radius: 40px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(124,106,247,0.15);
+      display: block;
+    }
+
+    /* SECTION */
+    section { padding: 100px 24px; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* STATEMENT SECTION */
+    .statement {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .statement blockquote {
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 300;
+      line-height: 1.45;
+      letter-spacing: -0.5px;
+      color: rgba(255,255,255,0.85);
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .statement blockquote strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .statement blockquote em {
+      font-style: normal;
+      color: var(--accent2);
+    }
+
+    /* FEATURES GRID */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 56px;
+    }
+    .feature-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: rgba(124,106,247,0.5);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* PRIVACY PROOF */
+    .proof {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 40px;
+      max-width: 560px;
+    }
+    .proof-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .proof-check {
+      color: var(--accent2);
+      font-size: 16px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .proof-text { font-size: 15px; color: rgba(255,255,255,0.75); }
+    .proof-text strong { color: var(--text); font-weight: 600; }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+      max-width: 680px;
+    }
+    .plan-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      background: var(--glass);
+    }
+    .plan-card.featured {
+      border-color: var(--accent);
+      background: rgba(124,106,247,0.08);
+    }
+    .plan-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      background: rgba(124,106,247,0.15);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .plan-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .plan-price { font-size: 32px; font-weight: 700; margin: 12px 0 4px; }
+    .plan-price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+    .plan-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .plan-features li { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; gap: 8px; }
+    .plan-features li::before { content: '✓'; color: var(--accent2); flex-shrink: 0; }
+
+    /* FOOTER */
+    footer {
+      padding: 48px 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo { font-size: 16px; font-weight: 600; }
+    .footer-logo span { color: var(--accent2); font-weight: 300; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; opacity: 0.5; }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      nav .nav-links { gap: 16px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">01<span>hush</span></div>
+  <div class="nav-links">
+    <a href="#privacy">Privacy</a>
+    <a href="#pricing">Pricing</a>
+    <a href="support.html">Support</a>
+    <a href="#" class="nav-cta">Download</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Runs entirely on your iPhone
+    </div>
+    <h1>The friend<br>who <em>never tells</em></h1>
+    <p class="hero-sub">Some things you can't say out loud. 01Hush listens to everything and tells no one.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+      <a href="#how" class="btn-secondary">How it works</a>
+    </div>
+    <p class="hero-note">Free to start · iPhone 15 Pro and later · No account required</p>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="statement">
+    <div class="container">
+      <blockquote>
+        Most AI assistants send everything you say to a remote server.<br>
+        <strong>01Hush is different.</strong><br>
+        Your words never touch a server. There is no company reading transcripts.<br>
+        No terms of service that quietly reserve rights to your most private thoughts.<br><br>
+        <em>Not a promise. A technical fact.</em>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <p class="section-label">How it works</p>
+      <h2 class="section-title">AI that lives on your phone.<br>Not in someone's cloud.</h2>
+      <p class="section-body">01Hush runs Google's Gemma 4 model directly on your iPhone using Apple Silicon. After the initial download, it works with no internet connection. On a plane. In a hospital. Anywhere.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🧠</span>
+          <div class="feature-title">Remembers you over time</div>
+          <div class="feature-desc">Unlike apps that forget the moment you close them, 01Hush builds a private picture of you across conversations — and uses it to give you better, more personal responses.</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🤝</span>
+          <div class="feature-title">Talks like a friend, not a bot</div>
+          <div class="feature-desc">When you need an answer, it gives you one. When you need to feel heard first, it does that. It reads the room instead of defaulting to one mode.</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">✈️</span>
+          <div class="feature-title">Works completely offline</div>
+          <div class="feature-desc">No Wi-Fi required. No signal required. The model runs entirely on your device using the same chip that powers everything else on your iPhone.</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔒</span>
+          <div class="feature-title">Zero data collection</div>
+          <div class="feature-desc">No analytics. No crash logs sent to servers. No account. Nothing leaves your phone — ever.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <p class="section-label">Privacy</p>
+      <h2 class="section-title">The most private AI app<br>you've ever used.</h2>
+      <p class="section-body">Privacy isn't a feature we added. It's the reason 01Hush exists. The only way to make this promise honestly is to make it technically impossible to break.</p>
+
+      <div class="proof">
+        <div class="proof-item">
+          <span class="proof-check">✓</span>
+          <span class="proof-text"><strong>No servers.</strong> The model runs on your device. There is nothing to intercept in transit because there is no transit.</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-check">✓</span>
+          <span class="proof-text"><strong>No account.</strong> We don't know who you are. We have no way to link your conversations to you even if we wanted to.</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-check">✓</span>
+          <span class="proof-text"><strong>No analytics or tracking.</strong> We do not collect crash reports, usage data, or any telemetry. Zero.</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-check">✓</span>
+          <span class="proof-text"><strong>Your memory stays with you.</strong> Everything 01Hush learns about you is stored locally and can be deleted any time from Settings.</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-check">✓</span>
+          <span class="proof-text"><strong>Open to inspection.</strong> If you're technical, you can verify all of this yourself by monitoring network traffic. You'll find nothing outbound.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">Start free.<br>Unlock more when you're ready.</h2>
+      <p class="section-body">The core experience is free. Pro unlocks a smarter model and the ability to discuss any topic without filters.</p>
+
+      <div class="pricing-grid">
+        <div class="plan-card">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">$0</div>
+          <div class="plan-desc">Everything you need to get started.</div>
+          <ul class="plan-features">
+            <li>Gemma E2B — fast, capable on-device model</li>
+            <li>Unlimited conversations</li>
+            <li>Persistent memory across chats</li>
+            <li>Works fully offline</li>
+            <li>Zero data collection</li>
+          </ul>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">Pro</div>
+          <div class="plan-name">01Hush Pro</div>
+          <div class="plan-price">$4.99 <span>/ month</span></div>
+          <div class="plan-desc">For deeper conversations and complete openness.</div>
+          <ul class="plan-features">
+            <li>Everything in Free</li>
+            <li>Gemma E4B — smarter, more nuanced model</li>
+            <li>18+ Mode — discuss any topic without filters</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top: 20px; font-size: 12px; color: var(--muted); opacity: 0.6;">
+        Subscriptions are managed through your Apple ID. Cancel any time in Settings.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">01<span>hush</span></div>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="support.html">Support</a>
+  </div>
+  <div class="footer-copy">© 2026 zerox1. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

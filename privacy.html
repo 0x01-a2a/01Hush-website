@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — 01Hush</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080616; --bg2: #0e0b1e;
+      --accent: #7c6af7; --accent2: #a78bfa;
+      --text: #ffffff; --muted: rgba(255,255,255,0.55);
+      --border: rgba(124,106,247,0.2);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,6,22,0.9);
+      backdrop-filter: blur(12px);
+    }
+    .logo { font-size: 18px; font-weight: 600; text-decoration: none; color: var(--text); }
+    .logo span { color: var(--accent2); font-weight: 300; }
+    nav a.back { color: var(--muted); text-decoration: none; font-size: 14px; }
+    nav a.back:hover { color: var(--text); }
+    .content { max-width: 720px; margin: 0 auto; padding: 72px 24px 100px; }
+    .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent2); margin-bottom: 12px;
+    }
+    h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 8px; }
+    .updated { font-size: 13px; color: var(--muted); margin-bottom: 48px; }
+    .summary-box {
+      background: rgba(124,106,247,0.08);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+    .summary-box p { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .summary-box strong { color: var(--accent2); }
+    h2 {
+      font-size: 20px; font-weight: 600; margin-top: 44px; margin-bottom: 12px;
+      color: var(--text);
+    }
+    p { font-size: 15px; color: var(--muted); margin-bottom: 16px; }
+    ul { padding-left: 20px; margin-bottom: 16px; }
+    ul li { font-size: 15px; color: var(--muted); margin-bottom: 8px; }
+    strong { color: rgba(255,255,255,0.85); }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    footer {
+      padding: 32px 40px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; opacity: 0.5; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">01<span>hush</span></a>
+  <a href="index.html" class="back">← Back</a>
+</nav>
+
+<div class="content">
+  <p class="eyebrow">Legal</p>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: April 2026</p>
+
+  <div class="summary-box">
+    <p><strong>The short version:</strong> 01Hush does not collect, transmit, or store any personal data on external servers. Everything — your conversations, your memory, your settings — stays on your device. We have no servers receiving your data because we built the app so that it does not send any.</p>
+  </div>
+
+  <h2>Who we are</h2>
+  <p>01Hush is developed by zerox1 ("we", "us", "our"). You can contact us at <a href="mailto:support@zerox1.world">support@zerox1.world</a>.</p>
+
+  <h2>What data we collect</h2>
+  <p><strong>We collect nothing.</strong> 01Hush does not collect, transmit, or share any personal information, usage data, analytics, crash reports, or any other data with us or any third party.</p>
+  <p>Specifically, we do not collect:</p>
+  <ul>
+    <li>Your name, email address, or any account information (no account is required)</li>
+    <li>The contents of your conversations</li>
+    <li>Your device identifiers, IP address, or location</li>
+    <li>Usage statistics, session lengths, or feature interaction data</li>
+    <li>Crash reports or diagnostic data sent to our servers</li>
+    <li>Any information about you whatsoever</li>
+  </ul>
+
+  <h2>How the app works technically</h2>
+  <p>01Hush runs an AI language model (Google's Gemma 4) directly on your iPhone using Apple Silicon. All inference — every word the AI produces — happens on your device. No text you type is sent to any server for processing.</p>
+  <p>The AI memory system, which allows 01Hush to remember things about you across conversations, stores all data locally in your device's app storage. This data never leaves your device.</p>
+
+  <h2>Model download</h2>
+  <p>When you first set up 01Hush, the app downloads the AI model files from Hugging Face, a public model repository. This download is a one-time transfer of model weight files. No personal information is sent during this download. After the model is downloaded, the app operates entirely offline.</p>
+
+  <h2>Subscriptions and payments</h2>
+  <p>01Hush Pro subscriptions are processed entirely by Apple through the App Store. We do not receive or store your payment information. Apple's privacy policy governs the payment transaction. We receive only a confirmation from Apple that a subscription is active — no financial details.</p>
+
+  <h2>Third-party services</h2>
+  <p>01Hush does not integrate any third-party analytics, advertising, or data collection SDKs. We do not use Firebase, Mixpanel, Segment, Facebook SDK, Google Analytics, or any equivalent service.</p>
+
+  <h2>Children's privacy</h2>
+  <p>01Hush is not directed at children under 13. We do not knowingly collect data from anyone, including children.</p>
+
+  <h2>Your data, your control</h2>
+  <p>Because all data is stored locally on your device, you have complete control over it at all times:</p>
+  <ul>
+    <li><strong>Delete chat history</strong> — Settings → Clear all chat history</li>
+    <li><strong>Delete AI memory</strong> — Settings → Reset agent memory</li>
+    <li><strong>Delete everything</strong> — Delete the app from your iPhone. All data is removed instantly.</li>
+  </ul>
+
+  <h2>Changes to this policy</h2>
+  <p>If we make changes to this policy, we will update the date at the top of this page. Because we collect no data, any changes would only reflect clarifications or changes in how the app itself works technically.</p>
+
+  <h2>Contact</h2>
+  <p>If you have questions about this privacy policy, contact us at <a href="mailto:support@zerox1.world">support@zerox1.world</a>.</p>
+
+  <hr>
+  <p style="font-size: 13px; opacity: 0.5;">This policy was written to be read by humans, not lawyers. If something is unclear, just ask.</p>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="support.html">Support</a>
+  </div>
+  <div class="footer-copy">© 2026 zerox1. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
