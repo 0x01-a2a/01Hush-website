@@ -15,9 +15,9 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:      #060606;
-      --surface: #0d0d0d;
-      --border:  #191919;
+      --bg:      #1a1a28;
+      --surface: #23233a;
+      --border:  #323248;
       --dim:     #444444;
       --sub:     #666666;
       --text:    #aaaaaa;
@@ -51,7 +51,7 @@
     .site-header {
       position: sticky; top: 0; z-index: 100;
       border-bottom: 1px solid var(--border);
-      background: rgba(6,6,6,0.94); backdrop-filter: blur(14px);
+      background: rgba(26,26,40,0.94); backdrop-filter: blur(14px);
     }
     .site-header .wrap {
       display: flex; justify-content: space-between; align-items: center; height: 54px;
@@ -208,12 +208,14 @@
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
       <a href="https://0x01.world" target="_blank" rel="noopener" class="nav-keep nav-cta">0x01.world ↗</a>
+      <a href="https://www.infinityteam.io/" target="_blank" rel="noopener" title="Infinity Team" style="display:inline-flex; align-items:center; gap:6px; opacity:0.55; transition:opacity 0.2s; text-decoration:none;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.55'"><img src="/infinity-logo.png" alt="Infinity Team" style="height:18px; width:18px; border-radius:4px; object-fit:cover; filter:brightness(0) invert(1);" /></a>
     </nav>
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap hero-inner">
+<section class="hero" style="position:relative; overflow:hidden;">
+  <canvas id="hush-canvas" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0;"></canvas>
+  <div class="wrap hero-inner" style="position:relative; z-index:1;">
 
     <div class="hero-badge">
       <span class="pulse-dot"></span>
@@ -233,6 +235,14 @@
     <div class="hero-ctas">
       <a class="link-btn link-btn-primary" href="https://apps.apple.com/app/01hush" target="_blank" rel="noopener">Download on App Store</a>
       <a class="link-btn" href="support.html">FAQ</a>
+    </div>
+
+    <div style="margin-top:28px; display:flex; align-items:center; gap:10px;">
+      <span style="font-size:10.5px; color:var(--dim); letter-spacing:0.08em;">A product of</span>
+      <a href="https://www.infinityteam.io/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:7px; text-decoration:none; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+        <img src="/infinity-logo.png" alt="Infinity Team" style="height:20px; width:20px; border-radius:4px; object-fit:cover; filter:brightness(0) invert(1);" />
+        <span style="font-size:10.5px; color:var(--text); letter-spacing:0.08em;">Infinity Team</span>
+      </a>
     </div>
 
     <div class="privacy-strip">
@@ -330,11 +340,107 @@
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms of Service</a>
       <a href="support.html">Support</a>
-      <a href="mailto:support@zerox1.world">support@zerox1.world</a>
+      <a href="mailto:contact@0x01.world">contact@0x01.world</a>
     </div>
-    <div class="footer-copy">© 2026 zerox1. All rights reserved.</div>
+    <div class="footer-copy">© 2026 <a href="https://www.infinityteam.io/" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">Infinity Team</a>. All rights reserved.</div>
   </div>
 </footer>
 
+<script>
+;(function () {
+  const canvas = document.getElementById('hush-canvas')
+  const hero   = canvas.parentElement
+  const ctx    = canvas.getContext('2d')
+  const particles = []
+
+  function resize() {
+    canvas.width  = hero.offsetWidth
+    canvas.height = hero.offsetHeight
+  }
+  resize()
+  window.addEventListener('resize', resize)
+
+  // Whisper particle: spawns near bottom-center, drifts upward, fades before escaping
+  function spawn() {
+    const cx = canvas.width * (0.3 + Math.random() * 0.4)
+    particles.push({
+      x:    cx,
+      y:    canvas.height * (0.6 + Math.random() * 0.3),
+      vx:   (Math.random() - 0.5) * 0.4,
+      vy:   -(0.4 + Math.random() * 0.6),
+      r:    1 + Math.random() * 2.5,
+      life: 0,
+      // max life varies so particles dissolve at different heights
+      maxLife: 180 + Math.random() * 140,
+      // most are soft green, occasional white
+      hue: Math.random() < 0.7 ? 'green' : 'white',
+    })
+  }
+
+  let frame = 0
+  function tick() {
+    requestAnimationFrame(tick)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    // Spawn ~1 particle every 5 frames
+    frame++
+    if (frame % 5 === 0 && particles.length < 60) spawn()
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i]
+      p.life++
+      p.x += p.vx
+      p.y += p.vy
+      // gentle horizontal drift
+      p.vx += (Math.random() - 0.5) * 0.04
+
+      const t    = p.life / p.maxLife          // 0 → 1
+      // fade in for first 20%, fade out for last 40%
+      const alpha = t < 0.2
+        ? (t / 0.2) * 0.55
+        : t > 0.6
+          ? ((1 - t) / 0.4) * 0.55
+          : 0.55
+
+      if (p.life >= p.maxLife) { particles.splice(i, 1); continue }
+
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+      if (p.hue === 'green') {
+        ctx.fillStyle = `rgba(0, 230, 118, ${alpha * 0.7})`
+      } else {
+        ctx.fillStyle = `rgba(200, 220, 255, ${alpha * 0.35})`
+      }
+      ctx.fill()
+
+      // soft glow for larger particles
+      if (p.r > 2) {
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2)
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3)
+        if (p.hue === 'green') {
+          grad.addColorStop(0, `rgba(0, 230, 118, ${alpha * 0.08})`)
+        } else {
+          grad.addColorStop(0, `rgba(200, 220, 255, ${alpha * 0.04})`)
+        }
+        grad.addColorStop(1, 'rgba(0,0,0,0)')
+        ctx.fillStyle = grad
+        ctx.fill()
+      }
+    }
+  }
+
+  // Pre-seed a few particles so hero isn't blank on load
+  for (let i = 0; i < 12; i++) {
+    spawn()
+    const p = particles[particles.length - 1]
+    p.life = Math.floor(Math.random() * p.maxLife * 0.5)
+    p.y -= p.vy * p.life
+    p.x += p.vx * p.life
+  }
+
+  tick()
+})()
+</script>
 </body>
 </html>
