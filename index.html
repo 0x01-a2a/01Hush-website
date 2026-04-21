@@ -8,25 +8,25 @@
   <meta property="og:title" content="01Hush — The friend who never tells">
   <meta property="og:description" content="On-device AI companion. Private by design. No internet required after setup.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#faf8fc">
+  <meta name="theme-color" content="#0d0b14">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:          #faf8fc;
-      --bg-card:     #ffffff;
-      --bg-alt:      #f3f0f7;
-      --accent:      #9333ea;
-      --accent-d:    #7e22ce;
-      --accent-soft: rgba(147,51,234,0.09);
-      --accent-border: rgba(147,51,234,0.20);
-      --text:        #1a0a2e;
-      --soft:        #7c6d8e;
-      --softer:      #b0a3c0;
-      --border:      rgba(0,0,0,0.07);
-      --shadow:      0 2px 12px rgba(0,0,0,0.07);
-      --shadow-lg:   0 8px 32px rgba(0,0,0,0.10);
+      --bg:          #0d0b14;
+      --bg-card:     #141020;
+      --bg-alt:      #1c1830;
+      --accent:      #b07ef8;
+      --accent-d:    #9333ea;
+      --accent-soft: rgba(176,126,248,0.12);
+      --accent-border: rgba(176,126,248,0.25);
+      --text:        #f0ebfa;
+      --soft:        rgba(240,235,250,0.55);
+      --softer:      rgba(240,235,250,0.30);
+      --border:      rgba(255,255,255,0.08);
+      --shadow:      0 2px 12px rgba(0,0,0,0.35);
+      --shadow-lg:   0 8px 32px rgba(0,0,0,0.50);
       --mono:        'JetBrains Mono', monospace;
       --sans:        'Inter', sans-serif;
       --serif:       'Instrument Serif', serif;
@@ -50,7 +50,7 @@
     /* ── Nav ─────────────────────────────── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(250,248,252,0.88);
+      background: rgba(13,11,20,0.88);
       backdrop-filter: saturate(180%) blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -82,8 +82,7 @@
     .hero-icon-bg {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 640px; height: 640px; border-radius: 22%;
-      opacity: 0.12; pointer-events: none; z-index: 0;
-      mix-blend-mode: multiply;
+      opacity: 0.13; pointer-events: none; z-index: 0;
     }
     .hero-inner {
       display: grid; grid-template-columns: 1fr 480px; gap: 64px; align-items: center;
@@ -137,7 +136,7 @@
       background: var(--bg-card);
       border-radius: 40px;
       border: 1.5px solid var(--border);
-      box-shadow: 0 24px 64px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.07);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
       overflow: hidden; position: relative;
     }
     .phone-notch {
@@ -238,8 +237,8 @@
       font-family: var(--mono); font-size: 10px; font-weight: 700;
       padding: 4px 10px; border-radius: 99px; white-space: nowrap;
     }
-    .data-badge.on { background: rgba(34,197,94,0.12); color: #16a34a; }
-    .data-badge.off { background: rgba(239,68,68,0.10); color: #dc2626; }
+    .data-badge.on { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .data-badge.off { background: rgba(239,68,68,0.15); color: #f87171; }
 
     /* ── Pro section ─────────────────────── */
     .pro-section {
